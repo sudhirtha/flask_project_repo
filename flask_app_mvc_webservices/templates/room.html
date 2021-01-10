@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room Page</title>
+    <style>
+body {
+  background-color: lightblue;
+}
+h3 {
+  background-color:yellow;
+}
+</style>
+</head>
+<body>
+   <center><h1>Room</h1></center>   <a href="/home/">HOME</a>
+    <br>{{resp}}<br><br>
+
+    <form action="/room/" method="post">
+        Room Id : <input type="text" name="rid" value="{{room.id}}"> <br><br>
+        Room Type :<select name="rtype">
+                            <option value="0">--select--</option>
+                {%if room.type == 'PREMIUM' %}  <option value="PREMIUM" selected>PREMIUM</option> {% else %} <option value="PREMIUM" >PREMIUM</option>  {% endif %}
+                {%if room.type == 'NORMAL' %}  <option value="NORMAL" selected>NORMAL</option> {% else %} <option value="NORMAL" >NORMAL</option>  {% endif %}
+                {%if room.type == 'DELUX' %}  <option value="DELUX" selected>DELUX</option> {% else %} <option value="DELUX" >DELUX</option> {% endif %}
+                {%if room.type == 'STANDARD' %}  <option value="STANDARD" selected>STANDARD</option> {% else %} <option value="STANDARD" >STANDARD</option>  {% endif %}
+    </select><br><br>
+        Room Charge : <input type="text" name="rcharge" value="{{room.charge}}"> <br><br>
+        Room Status :
+                         {%if room.status == 'A' %}  <input type="radio" value="A" name="rstatus" checked > FREE{% else %} <input type="radio" value="A" name="rstatus" > FREE  {% endif %}
+                         {%if room.status == 'NA' %}  <input type="radio" value="NA" name="rstatus" checked > BOOKED{% else %} <input type="radio" value="NA" name="rstatus" > BOOKED  {% endif %}
+                <br><br>
+                <br><br>
+        Hotel Select : <select name="hid" multiple>
+                            {% for hotel in hotellist %}
+                            <option value="{{hotel.id}}">{{hotel.id}}-{{hotel.name}}</option>
+                            {% endfor %}
+                        </select> <br><br>
+        <input type="submit">
+    </form>
+
+    <br>
+
+    <table border="1">
+            <thead>
+                <th><a href="/room/rid"> Room ID </a></th>
+                <th><a href="/room/rtype"> Room Type </a></th>
+                <th><a href="/room/rcharge"> Room Charge </a></th>
+                <th><a href="/room/rstatus"> Room Status </a></th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                {% for room in roomlist %}
+                    <tr>
+                        <td>{{room.id}}</td>
+                        <td>{{room.type}}</td>
+                        <td>{{room.charge}}</td>
+                         <td>{{room.status}}</td>
+                        <td>
+                            <a href="/room/edit/{{room.id}}">EDIT</a>
+                            <a href="/room/delete/{{room.id}}">DELETE</a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+
+</body>
+</html>

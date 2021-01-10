@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Page</title>
+    <style>
+body {
+  background-color: lightblue;
+}
+h3 {
+  background-color:yellow;
+}
+</style>
+</head>
+<body>
+   <center><h1>Menu</h1></center>   <a href="/home/">HOME</a>
+    <br>{{resp}}<br><br>
+
+    <form action="/menu/" method="post">
+        Menu Id : <input type="text" name="mid" value="{{menu.id}}" readonly>   <br><br>
+        Menu Name:<input type="text" name="mname" value="{{menu.name}}"> <br><br>
+        Menu Price<input type="text" name="mprice" value="{{menu.price}}"> <br><br>
+         Menu Hotel Id : <select name="menuhotels" multiple>
+                            {% for hotel in hotellist %}
+                            <option value="{{hotel.id}}">{{hotel.name}}</option>
+                            {% endfor %}
+                        </select><br><br>
+        <input type="submit">
+    </form>
+
+    <br>
+
+    <table border="1">
+            <thead>
+                <th>Menu ID </th>
+                <th> Menu Name</th>
+                <th> Menu Price</th>
+                <th>Menu Hotel Id</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                {% for menu in menulist %}
+                    <tr>
+                        <td>{{menu.id}}</td>
+                        <td>{{menu.name}}</td>
+                        <td>{{menu.price}}</td>
+
+                        <td><br>{% for i in menu.href %} {{i.id}}-{{i.name}} <br><br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a href="/menu/edit/{{menu.id}}">EDIT</a>
+                            <a href="/menu/delete/{{menu.id}}">DELETE</a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accounts Page</title>
+    <style>
+body {
+  background-color: lightblue;
+}
+h3 {
+  background-color:yellow;
+}
+</style>
+</head>
+<body>
+   <center><h1>Account Page...!</h1></center>   <a href="/home/">HOME</a>
+    <br>{{resp}}<br><br>
+
+
+    <form action="/account/" method="post">
+        Account Id : <input type="text" name="accno" value="{{account.id}}"> <br><br>
+        Account Type :<select name="accty">
+                            <option value="0">--select--</option>
+                {%if account.type == 'Saving' %}  <option value="Saving" selected>SAVING</option> {% else %} <option value="Saving" >SAVING</option> {% endif %}
+                {%if account.type == 'Current' %}  <option value="Current" selected>Current</option> {% else %} <option value="Current" >CURRENT</option>  {% endif %}
+    </select><br><br>
+        Account Balance : <input type="text" name="accbal" value="{{account.balance}}"> <br><br>
+        <input type="submit">
+    </form>
+
+    <br>
+
+    <table border="1">
+            <thead>
+                <th>Account Id</th> <th>Account Type</th> <th>Account Balance</th> <th>Action</th>
+            </thead>
+            <tbody>
+                {% for acc in acclist %}
+                    <tr>
+                        <td>{{acc.id}}</td>
+                        <td>{{acc.type}}</td>
+                        <td>{{acc.balance}}</td>
+                        <td>
+                            <a href="/edit/{{acc.id}}">EDIT</a>
+                            <a href="/delete/{{acc.id}}">DELETE</a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+
+</body>
+</html>

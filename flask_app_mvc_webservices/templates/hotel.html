@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Page</title>
+    <style>
+multibackground {
+   background-image: url(/css/images/logo.png), url(/css/images/border.png);
+   background-position: left top, left top;
+   background-repeat: no-repeat, repeat;
+   padding: 75px;
+}
+</style>
+</head>
+<body>
+   <center><h1>Hotel</h1></center>   <a href="/home/">HOME</a>
+    <br>{{resp}}<br><br>
+
+    <form action="/hotel/" method="post">
+        Hotel Id : <input type="text" name="hid" value="{{hotel.id}}">  <br><br>
+        Hotel Name:<input type="text" name="hname" value="{{hotel.name}}"> <br><br>
+        Hotel Address<input type="text" name="haddress" value="{{hotel.address}}"> <br><br>
+        Hotel contact:<input type="text" name="hcontact" value="{{hotel.contact}}"> <br><br>
+        Hotel website:<input type="text" name="hwebsite" value="{{hotel.website}}"> <br><br>
+        Hotel Acc No : <select name="hotelaccno">
+                            <option value="0">---select---</option>
+
+        {% if hotel.haccref %} <option value="{{hotel.haccref.id}}" selected>{{hotel.haccref.id}}-{{hotel.haccref.type}}</option>
+        {% else %}{% for acc in acclist %}<option value="{{acc.id}}">{{acc.id}}-{{acc.type}}</option>{% endfor %} {% endif %}
+
+                        </select> <br><br>
+
+        <input type="submit">
+    </form>
+
+    <br>
+
+    <table border="1">
+            <thead>
+                <th>Hotel ID </th>
+                <th> Hotel Name</th>
+                <th> Hotel Address</th>
+                <th> Hotel Contact</th>
+                <th> Hotel Website</th>
+                <th>Hotel Acc No</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                {% for hotel in hotellist %}
+                    <tr>
+                        <td>{{hotel.id}}</td>
+                        <td>{{hotel.name}}</td>
+                        <td>{{hotel.address}}</td>
+                         <td>{{hotel.contact}}</td>
+                         <td>{{hotel.website}}</td>
+                         <td>{{hotel.accno}}</td>
+                        <td>{% for room in hotel.roomref%} {{room.type}}-{{room.qty}}<br> {% endfor %}<br></td>
+                        <td>
+                            <a href="/hotel/edit/{{hotel.id}}">EDIT</a>
+                            <a href="/hotel/delete/{{hotel.id}}">DELETE</a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  background-color: coral;
+}
+body, html {
+  height: 10%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-img {
+  /* The image used */
+  background-image: url("img_nature.jpg");
+
+  min-height: 210px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Add styles to the form container */
+.container {
+  position: absolute;
+  right: 0;
+  margin: 20px;
+  max-width: 100px;
+  padding: 16px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 12px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup Page</title>
+</head>
+<body>
+    <center><h1>Signup Page...!</h1></center>      <a href="/hotel_booking/">HOME</a>
+    <br>{{resp}}<br><br>
+
+    <form action="/registration/" method="post">
+        Customer Id : <input type="text" name="custid" value="{{cust.id}}"> <br><br>
+        Customer Name :<input type="text" name="custname" value="{{cust.name}}"> <br><br>
+        Customer Address : <input type="text" name="custadr" value="{{cust.address}}"> <br><br>
+        Customer Contact : <input type="text" name="custcont" value="{{cust.contact}}"> <br><br>
+        Customer Mail : <input type="text" name="custmail" value="{{cust.email}}"> <br><br>
+        Customer Password : <input type="password" name="custpass" value=""> <br><br>
+        Customer Acc No : <select name="custaccno">
+                            <option value="0">---select---</option>
+
+        {% if cust.caccref %} <option value="{{cust.caccref.id}}" selected>{{cust.caccref.id}}-{{cust.caccref.type}}</option>
+        {% else %}{% for acc in acclist %}<option value="{{acc.id}}">{{acc.id}}-{{acc.type}}</option>{% endfor %} {% endif %}
+
+                        </select> <br><br>
+        <input type="submit">
+    </form>
+
+    <br>
+
+</body>
+</html>

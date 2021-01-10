@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Booking</title>
+</head>
+<body>
+  <a href="">Home</a>
+  <a href="">News</a>
+  <a href="/customer/edit/{{user}}">Edit</a>
+  <a href="">Contact</a>
+  <a href="">About</a>
+
+<p style="text-align:right"><font color="red" size="5" >{{user.title()}}</font> &nbsp; &nbsp; <a href="/logout">Logout</a></p>
+        <center><h2 >Hotel Booking Page..!</h2></center>
+        <ul >
+        {% for hotel in hotellist %}
+            <li style="background-color: tomato; border: 2px solid green "><h2> &nbsp; &nbsp;{{hotel.name}} </h2> {% for room in hotel.roomref %}
+                &nbsp; &nbsp;<a href="/booked/{{user}}">{{room.type}} -  Rs. {{room.charge}}</a> <br> {% endfor %} &nbsp; &nbsp;{{hotel.address}}<br>
+                &nbsp; &nbsp;{{hotel.contact}}<br>&nbsp; &nbsp;{{hotel.website}} <br><br></li><br><br>
+        {% endfor %}
+        </ul>
+</body>
+</html>
